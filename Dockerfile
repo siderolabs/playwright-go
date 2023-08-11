@@ -1,7 +1,8 @@
-FROM mcr.microsoft.com/playwright:v1.30.0-focal AS container
+FROM mcr.microsoft.com/playwright:v1.35.1-focal AS container
 
-ARG GO_VERSION=1.20
+ARG GO_VERSION=1.21.0
 
+ENV GOTOOLCHAIN local
 RUN apt-get update && apt-get install -y build-essential && \
     wget -O /tmp/go.tar.gz https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz && \
     rm -rf /usr/local/go && \
