@@ -1,6 +1,6 @@
-FROM mcr.microsoft.com/playwright:v1.35.1-focal AS container
+FROM mcr.microsoft.com/playwright:v1.40.1-jammy AS container
 
-ARG GO_VERSION=1.21.0
+ARG GO_VERSION=1.21.5
 
 ENV GOTOOLCHAIN local
 RUN apt-get update && apt-get install -y build-essential && \
