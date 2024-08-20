@@ -1,6 +1,6 @@
-FROM mcr.microsoft.com/playwright:v1.41.1-jammy AS container
+FROM mcr.microsoft.com/playwright:v1.46.1-jammy AS container
 
-ARG GO_VERSION=1.22.0
+ARG GO_VERSION=1.23.0
 
 ENV GOTOOLCHAIN local
 RUN apt-get update && apt-get install -y build-essential && \
