@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-08-20T09:47:46Z by kres 7be2a05.
+# Generated on 2024-08-20T10:40:22Z by kres 7be2a05.
 
 name: default
 concurrency:
@@ -82,14 +82,14 @@ jobs:
         run: |
           make
       - name: login-to-registry
-        if: startsWith(github.ref, 'refs/tags/')
+        if: github.event_name != 'pull_request'
         uses: docker/login-action@v3
         with:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
           username: ${{ github.repository_owner }}
       - name: push
-        if: startsWith(github.ref, 'refs/tags/')
+        if: github.event_name != 'pull_request'
         env:
           PUSH: "true"
         run: |

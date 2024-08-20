@@ -18,9 +18,13 @@ spec:
           nonMakeStep: true
           command: make
         - name: login-to-registry
+          conditions:
+            - except-pull-request
           registryLoginStep:
             registry: ghcr.io
         - name: push
+          conditions:
+            - except-pull-request
           nonMakeStep: true
           command: make
           environment:
