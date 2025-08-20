@@ -1,8 +1,7 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-08-20T10:40:22Z by kres 7be2a05.
+# Generated on 2025-08-20T08:13:43Z by kres ff3b493-dirty.
 
-name: default
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
@@ -17,6 +16,7 @@ concurrency:
     branches:
       - main
       - release-*
+name: default
 jobs:
   default:
     permissions:
@@ -29,19 +29,10 @@ jobs:
       - self-hosted
       - pkgs
     if: (!startsWith(github.head_ref, 'renovate/') && !startsWith(github.head_ref, 'dependabot/'))
-    services:
-      buildkitd:
-        image: moby/buildkit:v0.15.1
-        options: --privileged
-        ports:
-          - 1234:1234
-        volumes:
-          - /var/lib/buildkit/${{ github.repository }}:/var/lib/buildkit
-          - /usr/etc/buildkit/buildkitd.toml:/etc/buildkit/buildkitd.toml
     steps:
       - name: gather-system-info
         id: system-info
-        uses: kenchan0130/actions-system-info@v1.3.0
+        uses: kenchan0130/actions-system-info@v1.4.0
         continue-on-error: true
       - name: print-system-info
         run: |
@@ -65,7 +56,7 @@ jobs:
           done
         continue-on-error: true
       - name: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Unshallow
         run: |
           git fetch --prune --unshallow
@@ -77,7 +68,7 @@ jobs:
             - endpoint: tcp://buildkit-arm64.ci.svc.cluster.local:1234
               platforms: linux/arm64
           driver: remote
-          endpoint: tcp://127.0.0.1:1234
+          endpoint: tcp://buildkit-amd64.ci.svc.cluster.local:1234
       - name: build
         run: |
           make
