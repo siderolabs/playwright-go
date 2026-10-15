@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.54.0-noble AS container
+FROM mcr.microsoft.com/playwright:v1.64.1-noble AS container
 
 ARG GO_VERSION=1.25.0
 
